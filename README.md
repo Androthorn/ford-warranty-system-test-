@@ -7,9 +7,31 @@ Este é um sistema de gerenciamento de garantias desenvolvido para a Ford, utili
 
 - Python 3.8+
 - PostgreSQL 12+
+- Redis 6+
 - pip (gerenciador de pacotes Python)
+- Docker e Docker Compose (opcional)
 
 ## Instalação
+
+### Usando Docker (Recomendado)
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/ford-warranty-system.git
+cd ford-warranty-system
+```
+
+2. Inicie os containers:
+```bash
+docker-compose up --build
+```
+
+A aplicação estará disponível em:
+- API: http://localhost:8000
+- Documentação Swagger: http://localhost:8000/docs
+- Documentação ReDoc: http://localhost:8000/redoc
+
+### Instalação Manual
 
 1. Clone o repositório:
 ```bash
@@ -38,6 +60,12 @@ POSTGRES_PASSWORD=sua_senha
 POSTGRES_DB=ford_db
 SECRET_KEY=sua_chave_secreta
 ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Redis Configuration
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_DB=0
+REDIS_PASSWORD=
 ```
 
 5. Crie o banco de dados:
@@ -50,28 +78,9 @@ CREATE DATABASE ford_db;
 alembic upgrade head
 ```
 
-## Executando a Aplicação
-
-Para iniciar o servidor de desenvolvimento:
+7. Inicie o servidor:
 ```bash
 uvicorn app.main:app --reload
-```
-
-A aplicação estará disponível em:
-- API: http://localhost:8000
-- Documentação Swagger: http://localhost:8000/docs
-- Documentação ReDoc: http://localhost:8000/redoc
-
-## Testes
-
-Para executar os testes:
-```bash
-pytest
-```
-
-Para executar os testes com cobertura:
-```bash
-pytest --cov=app tests/
 ```
 
 ## Estrutura do Projeto
@@ -92,7 +101,8 @@ app/
 │           └── reports.py
 ├── core/
 │   ├── config.py
-│   └── security.py
+│   ├── security.py
+│   └── cache.py
 ├── crud/
 │   ├── base.py
 │   ├── user.py
@@ -182,6 +192,12 @@ app/
 - Tipos de falhas
 - Resumo de peças
 
+### Cache
+- Cache de relatórios com Redis
+- TTL configurável
+- Serialização/deserialização
+- Limpeza de cache
+
 ## Validações de Negócio
 
 ### Garantias
@@ -193,6 +209,30 @@ app/
 - Preço unitário deve ser maior que zero
 - Preço total deve ser igual a quantidade * preço unitário
 
+## Testes
+
+### Usando Docker
+```bash
+docker-compose run web pytest
+```
+
+### Manualmente
+```bash
+pytest
+```
+
+Para executar os testes com cobertura:
+```bash
+pytest --cov=app tests/
+```
+
+## CI/CD
+
+O projeto utiliza GitHub Actions para CI/CD, incluindo:
+- Testes automatizados
+- Verificação de código (lint)
+- Deploy automático (configurável)
+
 ## Contribuindo
 
 1. Faça um fork do projeto
@@ -203,4 +243,4 @@ app/
 
 ## Licença
 
-Inserir dados da licença utilizada, quando soubermos.
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
