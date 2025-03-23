@@ -203,4 +203,4 @@ app/
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes. 
+Inserir dados da licença utilizada, quando soubermos.
