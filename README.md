@@ -12,7 +12,7 @@ Este é um sistema de gerenciamento de garantias desenvolvido para a Ford, utili
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/ford-warranty-system.git
+git clone https://github.com/Androthorn/ford-warranty-system-test-.git
 cd ford-warranty-system
 ```
 
