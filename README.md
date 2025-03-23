@@ -1,5 +1,6 @@
 # Sistema de Gerenciamento de Garantias Ford
 
+Todo o código desenvolvido aqui faz parte de um teste para uso de FastAPI e não representa a FORD em qualquer contexto, é usado expressamente para nivelamento.
 Este é um sistema de gerenciamento de garantias desenvolvido para a Ford, utilizando FastAPI, SQLAlchemy e PostgreSQL.
 
 ## Requisitos
